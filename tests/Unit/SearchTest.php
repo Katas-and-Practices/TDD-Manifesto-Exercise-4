@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace Exercise4\Tests\Unit;
 
 require_once 'src/CitySearcher.php';
-require_once 'src/search/SimpleSearchPerformer.php';
+require_once 'src/search/SimpleStringSearchPerformer.php';
+require_once 'src/search/constraints/StringSearchMinLengthConstraint.php';
 
-use Exercise4\Search\SimpleSearchPerformer;
+use Exercise4\Search\Constraints\StringSearchMinLengthConstraint;
+use Exercise4\Search\SimpleStringSearchPerformer;
 use Exercise4\CitySearcher;
 use PHPUnit\Framework\TestCase;
 
@@ -17,7 +19,9 @@ class SearchTest extends TestCase
 
     public function setUp(): void
     {
-        $this->searcher = new CitySearcher(new SimpleSearchPerformer());
+        $this->searcher = new CitySearcher(
+            new SimpleStringSearchPerformer(constraints: [new StringSearchMinLengthConstraint(2)])
+        );
     }
 
     /**

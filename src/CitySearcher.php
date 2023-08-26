@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Exercise4;
 
-require_once 'search/SearchPerformer.php';
+require_once 'search/StringSearchPerformer.php';
 
-use Exercise4\Search\SearchPerformer;
+use Exercise4\Search\StringSearchPerformer;
 
 class CitySearcher
 {
@@ -30,7 +30,7 @@ class CitySearcher
     ];
 
     public function __construct(
-        private SearchPerformer $searchPerformer,
+        private StringSearchPerformer $searchPerformer,
     )
     {}
 
