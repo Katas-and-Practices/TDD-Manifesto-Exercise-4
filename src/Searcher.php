@@ -27,13 +27,12 @@ class Searcher
     {
         $cities = [];
 
-        $match = true;
-
         foreach (static::$cities as $city) {
-            for ($i = 0; $i < strlen($input); $i++) {
+            $match = true;
+
+            for ($i = 0; $match && $i < strlen($input); $i++) {
                 if ($city[$i] !== $input[$i]) {
                     $match = false;
-                    break;
                 }
             }
 

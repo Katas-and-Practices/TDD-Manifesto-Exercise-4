@@ -11,21 +11,38 @@ use PHPUnit\Framework\TestCase;
 
 class SearchTest extends TestCase
 {
+    public Searcher $searcher;
+
+    public function setUp(): void
+    {
+        $this->searcher = new Searcher();
+    }
+
     public function testShouldReturnEmptyWhenInputLessThanTwoCharacters(): void
     {
-        $searcher = new Searcher();
-
-        $result = $searcher->search('a');
+        $result = $this->searcher->search('a');
 
         $this->assertSame([], $result);
     }
 
-    public function testShouldReturnCitiesStartingWithInputGivenAtLeastTwoCharacters(): void
+    /**
+     * @dataProvider shouldReturnCitiesStartingWithInputGivenAtLeastTwoCharactersDataProvider
+     */
+    public function testShouldReturnCitiesStartingWithInputGivenAtLeastTwoCharacters(string $testcase, array $expected): void
     {
-        $searcher = new Searcher();
+        $result = $this->searcher->search($testcase);
 
-        $result = $searcher->search('Par');
+        $this->assertSame($expected, $result);
+    }
 
-        $this->assertSame(['Paris'], $result);
+    public static function shouldReturnCitiesStartingWithInputGivenAtLeastTwoCharactersDataProvider(): array
+    {
+        return [
+            ['Pa', ['Paris']],
+            ['Par', ['Paris']],
+            ['Paris', ['Paris']],
+            ['Va', ['Valencia', 'Vancouver']],
+            ['Van', ['Vancouver']],
+        ];
     }
 }
