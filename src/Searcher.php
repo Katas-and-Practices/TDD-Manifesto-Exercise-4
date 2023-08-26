@@ -25,6 +25,10 @@ class Searcher
 
     public function search(string $input): array
     {
+        if (strlen($input) < 2) {
+            return [];
+        }
+
         $cities = [];
 
         foreach (static::$cities as $city) {
