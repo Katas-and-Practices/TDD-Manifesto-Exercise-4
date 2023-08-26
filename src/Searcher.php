@@ -35,7 +35,7 @@ class Searcher
             $match = true;
 
             for ($i = 0; $match && $i < strlen($input); $i++) {
-                if ($city[$i] !== $input[$i]) {
+                if (strtolower($city[$i]) !== strtolower($input[$i])) {
                     $match = false;
                 }
             }
