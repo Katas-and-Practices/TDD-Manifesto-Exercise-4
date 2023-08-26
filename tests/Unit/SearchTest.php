@@ -48,6 +48,16 @@ class SearchTest extends TestCase
         $this->assertSame($expected, $result);
     }
 
+    /**
+     * @dataProvider shouldReturnCitiesContainingCaseInsensitiveInputGivenAtLeastTwoCharactersDataProvider
+     */
+    public function testShouldReturnCitiesContainingCaseInsensitiveInputGivenAtLeastTwoCharacters(string $testcase, array $expected): void
+    {
+        $result = $this->searcher->search($testcase);
+
+        $this->assertSame($expected, $result);
+    }
+
     public static function shouldReturnEmptyWhenInputLongerThanAnyCityNameDataProvider()
     {
         return [
@@ -76,6 +86,24 @@ class SearchTest extends TestCase
             ['parIS', ['Paris']],
             ['va', ['Valencia', 'Vancouver']],
             ['van', ['Vancouver']],
+        ];
+    }
+
+    public static function shouldReturnCitiesContainingCaseInsensitiveInputGivenAtLeastTwoCharactersDataProvider(): array
+    {
+        return [
+            ['ri', ['Paris']],
+            ['riS', ['Paris']],
+            ['ARI', ['Paris']],
+            ['ams', ['Amsterdam']],
+            ['ne', ['Sydney', 'New York City']],
+            ['ON', ['London', 'Hong Kong']],
+            ['LondonDDd', []],
+            ['bA', ['Bangkok', 'Dubai']],
+            ['bAii', []],
+            ['an', ['Vancouver', 'Bangkok', 'Istanbul']],
+            ['is', ['Paris', 'Istanbul']],
+            ['TEr', ['Rotterdam', 'Amsterdam']],
         ];
     }
 }

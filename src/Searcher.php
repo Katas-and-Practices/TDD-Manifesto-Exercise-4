@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Exercise4;
 
 class Searcher
@@ -32,11 +34,18 @@ class Searcher
         $cities = [];
 
         foreach (static::$cities as $city) {
-            $match = true;
+            $match = false;
 
-            for ($i = 0; $match && $i < strlen($input) && $i < strlen($city); $i++) {
-                if (strtolower($city[$i]) !== strtolower($input[$i])) {
-                    $match = false;
+            for ($i = 0; $i < strlen($city) - strlen(($input)) + 1; $i++) {
+                for ($j = 0, $tempCityIndex = 0; $j < strlen($input); $j++, $tempCityIndex++) {
+                    if (strtolower($city[$i + $tempCityIndex]) !== strtolower($input[$j])) {
+                        break;
+                    }
+                }
+
+                if ($j === strlen($input)) {
+                    $match = true;
+                    break;
                 }
             }
 
