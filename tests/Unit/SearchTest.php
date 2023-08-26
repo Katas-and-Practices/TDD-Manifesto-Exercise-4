@@ -4,18 +4,20 @@ declare(strict_types=1);
 
 namespace Exercise4\Tests\Unit;
 
-require_once 'src/Searcher.php';
+require_once 'src/CitySearcher.php';
+require_once 'src/search/SimpleSearchPerformer.php';
 
-use Exercise4\Searcher;
+use Exercise4\Search\SimpleSearchPerformer;
+use Exercise4\CitySearcher;
 use PHPUnit\Framework\TestCase;
 
 class SearchTest extends TestCase
 {
-    public Searcher $searcher;
+    public CitySearcher $searcher;
 
     public function setUp(): void
     {
-        $this->searcher = new Searcher();
+        $this->searcher = new CitySearcher(new SimpleSearchPerformer());
     }
 
     /**
