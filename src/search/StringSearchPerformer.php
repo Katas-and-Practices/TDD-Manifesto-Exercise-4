@@ -6,7 +6,7 @@ use Exercise4\Search\MatchAlgorithms\StringMatchAlgorithm;
 
 require_once 'match-algorithms/StringMatchAlgorithm.php';
 
-abstract class StringSearchPerformer
+class StringSearchPerformer
 {
     public function __construct(
         protected StringMatchAlgorithm $matchAlgorithm,

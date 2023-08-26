@@ -5,12 +5,13 @@ declare(strict_types=1);
 namespace Exercise4\Tests\Unit;
 
 require_once 'src/CitySearcher.php';
-require_once 'src/search/SimpleStringSearchPerformer.php';
+require_once 'src/search/match-algorithms/StringMatchCaseInsensitiveAlgorithm.php';
 require_once 'src/search/constraints/StringSearchMinLengthConstraint.php';
 
 use Exercise4\Search\Constraints\StringSearchMinLengthConstraint;
-use Exercise4\Search\SimpleStringSearchPerformer;
 use Exercise4\CitySearcher;
+use Exercise4\Search\MatchAlgorithms\StringMatchCaseInsensitiveAlgorithm;
+use Exercise4\Search\StringSearchPerformer;
 use PHPUnit\Framework\TestCase;
 
 class SearchTest extends TestCase
@@ -20,7 +21,10 @@ class SearchTest extends TestCase
     public function setUp(): void
     {
         $this->searcher = new CitySearcher(
-            new SimpleStringSearchPerformer(constraints: [new StringSearchMinLengthConstraint(2)])
+            new StringSearchPerformer(
+                new StringMatchCaseInsensitiveAlgorithm(),
+                [new StringSearchMinLengthConstraint(2)]
+            )
         );
     }
 
