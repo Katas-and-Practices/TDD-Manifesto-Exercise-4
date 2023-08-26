@@ -34,7 +34,7 @@ class Searcher
         foreach (static::$cities as $city) {
             $match = true;
 
-            for ($i = 0; $match && $i < strlen($input); $i++) {
+            for ($i = 0; $match && $i < strlen($input) && $i < strlen($city); $i++) {
                 if (strtolower($city[$i]) !== strtolower($input[$i])) {
                     $match = false;
                 }

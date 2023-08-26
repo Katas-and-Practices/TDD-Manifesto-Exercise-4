@@ -18,6 +18,9 @@ class SearchTest extends TestCase
         $this->searcher = new Searcher();
     }
 
+    /**
+     * @dataProvider shouldReturnEmptyWhenInputLongerThanAnyCityNameDataProvider
+     */
     public function testShouldReturnEmptyWhenInputLessThanTwoCharacters(): void
     {
         $result = $this->searcher->search('a');
@@ -43,6 +46,15 @@ class SearchTest extends TestCase
         $result = $this->searcher->search($testcase);
 
         $this->assertSame($expected, $result);
+    }
+
+    public static function shouldReturnEmptyWhenInputLongerThanAnyCityNameDataProvider()
+    {
+        return [
+            ['Pariss', []],
+            ['Istanbull', []],
+            ['SydneyY', []],
+        ];
     }
 
     public static function shouldReturnCitiesStartingWithInputGivenAtLeastTwoCharactersDataProvider(): array
