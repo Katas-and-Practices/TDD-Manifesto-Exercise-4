@@ -17,6 +17,15 @@ class SearchTest extends TestCase
 
         $result = $searcher->search('a');
 
-        $this->assertSame( '', $result);
+        $this->assertSame([], $result);
+    }
+
+    public function testShouldReturnCitiesStartingWithInputGivenAtLeastTwoCharacters(): void
+    {
+        $searcher = new Searcher();
+
+        $result = $searcher->search('Par');
+
+        $this->assertSame(['Paris'], $result);
     }
 }
